@@ -53,7 +53,7 @@ app.get('/getcity', function (req, res)
 				matches.push({city: cities[i]});
 			}
 		}
-		res.json(JSON.stringify(matches));
+		res.json(matches);
 	});
 });
 
