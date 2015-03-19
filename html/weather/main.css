@@ -1,0 +1,65 @@
+.pageHead
+{
+	background-color: #0099CC;
+}
+
+body
+{
+	background-image: url("background.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	color: white;
+}
+
+a:link
+{
+	color: lightblue;
+}
+
+a:visited
+{
+	color: darkblue;
+}
+
+#pageIndex ul
+{
+	color: #00ff00;	
+	padding-right: 20px;
+	text-align: center;
+}
+ 
+#pageIndex ul li
+{
+	display: inline;
+	font-family: "Georgia", Times, serif;
+	font-size: 34px;
+	padding: 20px;
+}
+
+.datatableOdds
+{
+	background-color: lightblue;
+}
+
+h1
+{
+	text-align: center;
+}
+
+h2
+{
+	font-family: arial, "Trebuchet MS", serif;
+}
+
+#function
+{
+	width: 400px;
+	background-color: gray;
+}
+
+#picture
+{
+	height: 275px;
+	width: 245px;
+}

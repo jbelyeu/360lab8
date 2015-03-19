@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+ <link rel="stylesheet" type="text/css" href="main.css">
+ <title> City Weather </title>
+ <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ </head>
+ 
+ <body>
+ 
+ <form id="userinfo">
+  Enter a City Name: <input type="text" id="cityField" value=""><br> <br>
+  Suggestions: <span id="textHint"> Empty </span>
+ </form> <br>
+ <button id="button"> Search </button>
+ <br><br>
+ <textarea id="chosenCity"> City</textarea>
+ <p> Current Weather </p>
+ <div id="weather"> This city is not yet experiencing weather </div>
+ <script>
+  $("#cityField").keyup(function()
+  {
+  	var url ="https://students.cs.byu.edu/~clement/CS360/ajax/getcity.cgi?q=";
+	url += $("#cityField").val();
+
+  	$.getJSON(url, function(data)
+	{
+		var everything = "<ul>";
+		$.each(data, function(i, item)
+		{
+			everything += "<li> " + data[i].city + "</li>";
+		});
+		everything += "</ul>";
+		$("#textHint").html(everything);
+	});
+  });
+
+  $("#userinfo").keypress(function(e)
+  {
+	if (e.which == 13)
+	{
+		loadWeather(e);
+	}
+  });
+
+  $("#button").click(function(e)
+  {
+  	loadWeather(e);
+  });
+
+  function loadWeather(e)
+  {
+  	var value = $("#cityField").val();
+	e.preventDefault();
+	var url = "https://api.wunderground.com/api/09edacfdbb8d40d3/geolookup/conditions/q/UT/";
+	url += value + ".json";
+	$("#chosenCity").text(value);
+
+	$.ajax(
+	{
+		url : url,
+		datatype : "jsonp",
+		success : function (parsed_json) 
+		{
+			var currentWeather = parsed_json['current_observation']['weather'];
+			var location = parsed_json['location']['city'];
+			var temperature = parsed_json['current_observation']['temperature_string'];
+			var html = "<ul>";
+			html += "<li>Location: " + location;
+			html += "<li>Temperature: " + temperature;
+			html += "<li>Weather: " + currentWeather;
+			html += "</ul>";
+			$("#weather").html(html);
+		}
+	});
+
+  }
+ </script>
+
+ </body>
+ </html>
+
